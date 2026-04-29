@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+<meta name="description" content="Tools HUB for Lords Mobile players featuring a speed up calculator, gem prediction, troops calculator, gear simulator, army colosseum rotation tools.">
+
+  
+  <!-- Website Lauch-->
+   
+  <meta name="google-site-verification" content="FlGR6pQWPwSldSOyh68fLYy2WbwQmTDo-DkGMigi-EI" />
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FL3JQFY6NF"></script>
+
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FL3JQFY6NF');
+</script>
+
+
+  <title>
+    Lords Mobile Tool | Gear Simulator |Army Colosseum Rotation | Troops Calculator | Speed Up Calculator
+  </title>
+  
+  <!--
+  CSS Tools (is not yet fixed)
+  
+  <link rel="stylesheet" href="csstool/global.css">
+  
+    <link rel="stylesheet" href="csstool/troops&gem.css">
+    
+    <link rel="stylesheet" href="csstool/gear.css">
+    
+    <link rel="stylesheet" href="csstool/chaos.css">
+  
+  <link rel="stylesheet" href="csstool/colo.css">
+  
+  -- >
+  
+  <!-- CURRENT FILE PATH -->
+  
+    <link rel="stylesheet" 
+    href="main.css">
+  
+  <!-- Automation tools Js -->
+  
+  <script src="autoTools/homepage.js" defer></script>
+  
+    <script src="autoTools/speedgemtool.js" defer></script>
+  
+  <script src="autoTools/trooptool.js" defer></script>
+  
+  <script src="autoTools/gear.js" defer></script>
+  
+  <script src="autoTools/armycolo.js" defer></script>
+  
+  <script src="autoTools/chaostool.js" defer></script>
+  
+  
+  </head>
+
+<body>
+  
+  
+  
+  <div class="container">
+    <h1 id="mainTitle">Lords Mobile Tools</h1>
+    
+    <div id="toolsMenu">
+      <h2>Select a Tool</h2>
+      <button class="menu-btn" onclick="openTool('speedTool')">Speed Up Calculator</button>
+      
+      <button class="menu-btn" onclick="openTool('gemTool')">Gem Prediction</button>
+      
+      <button class="menu-btn" onclick="openTool('troopTool')" style="background:#28a745">Troops Simulation</button>
+      
+      <button class="menu-btn" onclick="openTool('chaosTool')" style="background:#8e44ad">Chaos Arena Quest</button>
+      
+      <button class="menu-btn" onclick="openTool('gearTool')" style="background:#161b2e; border: 2px solid #4da6ff; color:#4da6ff;">Gear Simulator</button>
+      
+      <button class="menu-btn" onclick="openTool('coloTool')" style="background:#fd7e14; border: 2px solid #e86c00; color:white;">Army Colosseum Rotation</button>
+      
+    </div>
+    
+    <div id="coloTool" class="tool">
+      <button class="menu-btn" onclick="backTools()" style="background:#6c757d; max-width:120px; margin: 0 auto 15px 0;">← Back</button>
+      
+      <h2 style="color: #fd7e14; margin-bottom: 15px;">Army Colosseum Rotation</h2>
+      
+      <div class="colo-card">
+        <div class="colo-card-title">Current Constellation / Formation</div>
+        <div class="colo-card-value" id="c-current-buff">Loading...</div>
+        
+        <div class="colo-card-title">Troops Information</div>
+        
+        <div style="font-size: 15px; font-weight: 600; color:#333; margin-bottom: 15px;" id="c-current-troop">Loading...</div>
+        
+        <div class="colo-timers">
+          <div class="timer-box" style="flex: 100%;">
+            <span>Next Rotation In</span>
+            <div id="c-timer-next">--d --h --m --s</div>
+          </div>
+        </div>
+        
+        
+        <button class="admin-btn" onclick="toggleAdminPanel()">⚙️ Admin: Sync Rotation</button>
+        
+        <div id="coloAdminPanel" class="colo-card admin-panel" style="display: none;">
+          <div class="colo-card-title" style="color:#dc3545;">Sync Current Live Data</div>
+          
+          <label class="admin-label">Current Live Formation:</label>
+          <select id="adminPhaseSelect" class="admin-input">
+            <option value="0">Infantry Wedge (100 INFANTRY)</option>
+            <option value="1">Infantry Phalanx (50/50 INFANTRY RANGE)</option>
+            <option value="2">Range Wedge (100 RANGE)</option>
+            <option value="3">Range Phalanx (50/50 RANGE CAVALRY)</option>
+            <option value="4">Cavalry Wedge (100 CAVALRY)</option>
+            <option value="5">Cavalry Phalanx (50/50 INFANTRY CAVALRY)</option>
+            <option value="6">Range Phalanx (50/50 INFANTRY RANGE)</option>
+          </select>
+          
+          <label class="admin-label">Time Remaining In Game:</label>
+          <div style="display: flex; gap: 5px; margin-bottom:15px;">
+            <input type="number" id="adminDays" class="admin-input" placeholder="Days" min="0" max="5">
+            <input type="number" id="adminHours" class="admin-input" placeholder="Hrs" min="0" max="23">
+            <input type="number" id="adminMins" class="admin-input" placeholder="Mins" min="0" max="59">
+          </div>
+          
+          <button onclick="syncColoRotation()" class="admin-save-btn">Save & Sync</button>
+        </div>
+        
+      </div>
+      
+      <div class="colo-card" style="background:#fff3e6; border-color:#fd7e14; border-width: 2px;">
+        <div class="colo-card-title" style="color:#fd7e14;">Next Constellation / Formation</div>
+        <div style="font-size: 16px; font-weight: bold; color: #333;" id="c-next-buff">Loading...</div>
+      </div>
+      
+      <h3 style="color: #666; font-size: 14px; text-transform: uppercase; margin-top: 20px;">Full Rotation Sequence</h3>
+      <ul class="colo-list" id="coloListContainer">
+      </ul>
+    </div>
+    
+    
+  </div>
+  <div id="speedTool" class="tool">
+    <button class="menu-btn" onclick="backTools()" style="background:#6c757d; max-width:120px; margin: 0 auto 15px 0;">← Back</button>
+    <h2>Speed Up Calculator</h2>
+    <button class="menu-btn" onclick="toggleGuide('speedGuide')" style="max-width:150px; padding:8px; font-size:12px;">Toggle Guide</button>
+    <div id="speedGuide" class="guide">Enter the quantity of each speed up item you have. The calculator will provide the total time.</div>
+    
+    <select id="speedEvent" class="tool-select">
+      <option value="1">Normal Speed (100%)</option>
+      <option value="1.2">120% Speed Event</option>
+    </select>
+    
+    <input class="tool-input" id="d1" placeholder="1 min">
+    <input class="tool-input" id="d5" placeholder="5 min">
+    <input class="tool-input" id="d10" placeholder="10 min">
+    <input class="tool-input" id="d15" placeholder="15 min">
+    <input class="tool-input" id="d30" placeholder="30 min">
+    <input class="tool-input" id="h1" placeholder="1 hour">
+    <input class="tool-input" id="h3" placeholder="3 hour">
+    <input class="tool-input" id="h8" placeholder="8 hour">
+    <input class="tool-input" id="h15" placeholder="15 hour">
+    <input class="tool-input" id="h24" placeholder="24 hour">
+    <input class="tool-input" id="d3" placeholder="3 day">
+    <input class="tool-input" id="d7" placeholder="7 day">
+    <input class="tool-input" id="d14" placeholder="14 day">
+    <input class="tool-input" id="d30s" placeholder="30 day">
+    
+    <button class="menu-btn" onclick="calculateSpeed()">Calculate Total</button>
+    <button class="menu-btn" onclick="clearInputs('speedTool')" style="background:#6c757d">Clear All</button>
+  </div>
+  
+  
+  
+  <div id="gemTool" class="tool">
+    <button class="menu-btn" onclick="backTools()" style="background:#6c757d; max-width:120px; margin: 0 auto 15px 0;">← Back</button>
+    
+    <h2>Gem Prediction</h2>
+    <button class="menu-btn" onclick="toggleGuide('gemGuide')" style="max-width:150px; padding:8px; font-size:12px;">Toggle Guide</button>
+    <div id="gemGuide" class="guide">Enter your Estimated Gems or What you usually get from each source.</div>
+    
+    <input class="tool-input" id="colo" placeholder="Colosseum Gems (Every 3h)">
+    <input class="tool-input" id="guild" placeholder="Daily Guild Gifts">
+    <input class="tool-input" id="monster" placeholder="Daily Monster Hunt">
+    
+    <input class="tool-input" id="eventgems" placeholder="Base Weekly Events (Tap for more)" onfocus="revealAdv('advEvents')">
+    <div id="advEvents" class="adv-group">
+      <span class="adv-label">Detailed Events (Multipliers applied automatically)</span>
+      <input class="tool-input" id="kParagon" placeholder="Kingdom Paragon">
+      <input class="tool-input" id="hellEv" placeholder="Hell Events">
+      <input class="tool-input" id="gDuel" placeholder="Guild Duel">
+      <input class="tool-input" id="otherEv" placeholder="Other Events">
+    </div>
+    
+    <input class="tool-input" id="treasure" placeholder="Treasure Trove Deposit (Tap for int.)" onfocus="revealAdv('advTrove')">
+    <div id="advTrove" class="adv-group">
+      <span class="adv-label">Trove Interest Rates</span>
+      <input class="tool-input" id="basic" placeholder="Basic Interest %">
+      <input class="tool-input" id="bonus" placeholder="Bonus Interest %">
+    </div>
+    
+    <button class="menu-btn" onclick="calculateGems()">Predict 30 Days</button>
+    <button class="menu-btn" onclick="clearInputs('gemTool')" style="background:#6c757d">Clear All</button>
+  </div>
+  
+  
+  <div id="troopTool" class="tool">
+    <button class="menu-btn" onclick="backTools()" style="background:#6c757d; max-width:120px; margin: 0 auto 15px 0;">← Back</button>
+    
+    
+    <div class="sticky-stats">
+      <div class="stat-item">
+        <img id="h-army" class="game-icon" alt="Army" onerror="this.style.display='none'">
+        <span id="live-a">0</span>
+      </div>
+      
+      <div class="stat-item">
+        <img id="h-might" class="game-icon" alt="Might" onerror="this.style.display='none'">
+        <span id="live-m">0</span>
+      </div>
+    </div>
+    
+    
+    <div class="settings-grid">
+      <div class="input-group"><label>Training Speed %</label><input type="number" id="tSpeed" placeholder="0"></div>
+      <div class="input-group"><label>T1/T2 Sub % (Max 40)</label><input type="number" id="s12" placeholder="0" max="40" oninput="if(this.value>40)this.value=40;"></div>
+      <div class="input-group"><label>T3/T4 Sub % (Max 30)</label><input type="number" id="s34" placeholder="0" max="30" oninput="if(this.value>30)this.value=30;"></div>
+      
+      <div class="input-group" style="align-items: center;">
+        <label>120% Event</label>
+        <input type="checkbox" id="troopEvent" style="margin: 8px auto;">
+      </div>
+    </div>
+    <div id="tier-container"></div>
+    <button class="menu-btn" onclick="calculateTroops()" style="background:#28a745; max-width:100%;">CALCULATE RESOURCES</button>
+    <button class="menu-btn" onclick="clearInputs('troopTool')" style="background:#6c757d; max-width:100%;">Reset All</button>
+  </div>
+  </div>
+  
+  <div id="chaosTool" class="tool">
+    <button class="menu-btn" onclick="backTools()" style="background:#6c757d; max-width:120px; margin: 0 auto 15px 0;">← Back</button>
+    <h2 style="color: #8e44ad;">Chaos Arena Tracker</h2>
+    
+    <select id="chaosSelect" class="tool-select" onchange="runChaos()">
+      <option value="0">Select a Quest Type...</option>
+      <option value="1">1. Healing T4/T5 Quest</option>
+      <option value="2">2. Wound Enemies T4/T5 Quest</option>
+      <option value="3">3. Gathering Quest</option>
+      <option value="4">4. Destroy Enemy Troops Quest</option>
+    </select>
+    
+    <div id="chaosResult"></div>
+  </div>
+  
+  <div id="gearTool" class="tool">
+    <button class="menu-btn" onclick="backTools()" style="background:#2c3558; max-width:120px; margin: 0 auto 15px 0; border: 1px solid rgba(255,255,255,0.1);">← Back</button>
+    
+    <div class="wrap">
+      <div class="top-bar">
+        <div class="tabs">
+          <button class="tab active" onclick="switchSet(0)">Set 1</button>
+          <button class="tab" onclick="switchSet(1)">Set 2</button>
+          <button class="tab" onclick="switchSet(2)">Set 3</button>
+        </div>
+        <button class="reset-all-btn" onclick="resetEntireSet()">Reset Entire Set</button>
+      </div>
+      
+      <div class="stats-container" id="statsDisplay"></div>
+      <div class="grid" id="slotsGrid"></div>
+    </div>
+  </div>
+  </div>
+  
+  <div id="resultTab" class="resultTab">
+    <div class="resultBox">
+      <span class="closeBtn" onclick="closeResult()">X</span>
+      <div id="resultContent"></div>
+    </div>
+  </div>
+  
+  <div class="g-modal-wrap" id="mainModal">
+    <div class="g-modal-box">
+      <div class="g-modal-header">
+        <h3 id="modalTitle" style="margin:0; font-size:16px;">Select</h3>
+        <div style="display:flex; gap:8px;">
+          <button class="btn" style="width:auto; padding:6px 12px; margin:0; font-size:12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);" onclick="toggleGearSort()">↕ Sort: Lvl</button>
+          <button class="btn btn-clear" style="width:auto; padding:6px 15px; margin:0;" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+      <div class="g-modal-body" id="modalBody"></div>
+    </div>
+  </div
+
+</body>
+</html>
