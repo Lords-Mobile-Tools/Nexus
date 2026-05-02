@@ -4,6 +4,11 @@
     * { box-sizing: border-box; }
     html, body { overflow-x: hidden; width: 100%; }
     body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: #f4f4f4; text-align: center; margin: 0; padding: 10px; color: #333; }
+
+   /* NEW: Zoom Controls CSS */
+    .zoom-controls { position: fixed; top: 15px; right: 15px; z-index: 9999; display: flex; gap: 5px; background: #121726; padding: 8px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); transition: opacity 0.3s; }
+    .zoom-controls button { background: #2c3558; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; transition: background 0.2s; }
+    .zoom-controls button:hover { background: #4da6ff; color: #000; }
     
     .container { max-width: 900px; margin: auto; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     h1 { margin-top: 5px; font-size: 24px; color: #222; }
