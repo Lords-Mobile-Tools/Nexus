@@ -2,6 +2,29 @@
 // TOOL: TROOP CALCULATOR
 // ==========================================
 
+
+    // ==========================================
+// GLOBAL ZOOM UTILITY
+// ==========================================
+let currentZoomLevel = 1;
+
+function changeZoom(amount) {
+    const container = document.querySelector('.container');
+    if (amount === 0) {
+        currentZoomLevel = 1;
+    } else {
+        currentZoomLevel += amount;
+    }
+    // Set boundaries to prevent zooming too far in or out (between 50% and 200%)
+    currentZoomLevel = Math.max(0.5, Math.min(currentZoomLevel, 2));
+    
+    // Apply the zoom natively to the main container
+    container.style.zoom = currentZoomLevel;
+    
+    // Display the zoom level using your existing toast function
+    showToast(Zoom: ${Math.round(currentZoomLevel * 100)}%);
+}
+
 const ICONS = {
     army: "Picsart_26-03-19_23-38-15-683.png", might: "Picsart_26-03-17_22-24-27-109.png",
     food: "Picsart_26-03-17_22-31-19-118.png", stone: "Picsart_26-03-17_22-31-37-917.png",
